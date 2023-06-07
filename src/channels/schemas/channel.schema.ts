@@ -1,8 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
 
+export type ChannelDocument = HydratedDocument<Channel>;
 @Schema()
-export class Channel extends Document {
+export class Channel {
   @Prop()
   name: string;
 

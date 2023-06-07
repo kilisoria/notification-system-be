@@ -4,6 +4,7 @@ import { NotificationCategoriesService } from './notification-categories.service
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { NotificationCategorySchema } from './schemas/notification-category.schema';
+import { NotificationCategoriesController } from './notification-categories.controller';
 
 @Module({
   imports: [
@@ -17,5 +18,6 @@ import { NotificationCategorySchema } from './schemas/notification-category.sche
     ]),
   ],
   providers: [NotificationCategoriesService],
+  controllers: [NotificationCategoriesController],
 })
 export class NotificationCategoriesModule {}

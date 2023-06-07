@@ -1,8 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
 
+import { HydratedDocument } from 'mongoose';
+
+export type NotificationCategoryDocument =
+  HydratedDocument<NotificationCategory>;
 @Schema()
-export class NotificationCategory extends Document {
+export class NotificationCategory {
   @Prop()
   name: string;
 
