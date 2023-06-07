@@ -17,4 +17,9 @@ export class NotificationsController {
       createNotificationDto,
     );
   }
+
+  @Get('findAll')
+  findAll(): Promise<Notification[]> {
+    return this.notificationsService.findAll();
+  }
 }

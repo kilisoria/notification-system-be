@@ -65,6 +65,7 @@ export class NotificationsService {
       );
     }
 
+    //NOTE: I've created a module for each channel as Email, Sms, and PN considering these will have their particular implementation and logic. Also, Implementing separations of concern.
     switch (channelName) {
       case CHANNELS.EMAIL:
         const emailNotificationDto: CreateEmailNotificationDto = {
@@ -103,5 +104,15 @@ export class NotificationsService {
 
   create(notification: Notification) {
     this.notificationModel.create(notification);
+  }
+
+  findAll(): Promise<Notification[]> {
+    return this.notificationModel
+      .find()
+      .populate('user', '-_id name email phoneNumber')
+      .populate('channel', '-_id name')
+      .populate('subscribed', '-_id name')
+      .sort({ sentAt: -1 })
+      .exec();
   }
 }
