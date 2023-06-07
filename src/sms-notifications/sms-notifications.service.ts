@@ -13,7 +13,7 @@ export class SmsNotificationsService {
 
   async create(smsNotificationDto: CreateSmsNotificationDto) {
     /*
-      // TODO: Pending to implement the logic to send a SMS. We could user here some these alternatives:
+      // TODO: Pending to implement the logic to send a SMS. We could consider:
       AWS - SMS https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-phone-number-as-subscriber.html
       
       // According this test we're registing this notification as a simple log.

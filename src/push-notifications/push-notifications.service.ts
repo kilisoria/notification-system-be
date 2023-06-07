@@ -13,7 +13,7 @@ export class PushNotificationsService {
 
   async create(pushNotificationDto: CreatePushNotificationDto) {
     /*
-      // TODO: Pending to implement the logic to send the push Notification. We could user here some these alternatives:
+      // TODO: Pending to implement the logic to send the push Notification. We could consider:
       https://onesignal.com/
       https://www.twilio.com/
       
