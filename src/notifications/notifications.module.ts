@@ -4,6 +4,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from '../users/users.module';
 import { ChannelsModule } from '../channels/channels.module';
 import { PushNotificationsModule } from '../push-notifications/push-notifications.module';
+import { SmsNotificationsModule } from '../sms-notifications/sms-notifications.module';
+import { EmailNotificationsModule } from '../email-notifications/email-notifications.module';
 
 import { NotificationSchema } from './schemas/notifications.schema';
 
@@ -15,6 +17,8 @@ import { NotificationsController } from './notifications.controller';
     ChannelsModule,
     UsersModule,
     forwardRef(() => PushNotificationsModule),
+    forwardRef(() => SmsNotificationsModule),
+    forwardRef(() => EmailNotificationsModule),
     MongooseModule.forFeature([
       {
         name: 'Notification',

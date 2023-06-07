@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
 
 import { NotificationsService } from '../notifications/notifications.service';
 
@@ -6,7 +6,10 @@ import { CreatePushNotificationDto } from './dto/create-push-notifications.dto';
 
 @Injectable()
 export class PushNotificationsService {
-  constructor(private readonly notificationsService: NotificationsService) {}
+  constructor(
+    @Inject(forwardRef(() => NotificationsService))
+    private readonly notificationsService: NotificationsService,
+  ) {}
 
   async create(pushNotificationDto: CreatePushNotificationDto) {
     /*

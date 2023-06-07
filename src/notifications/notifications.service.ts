@@ -11,12 +11,16 @@ import { Model } from 'mongoose';
 import { Notification } from './schemas/notifications.schema';
 import { CreateNotificationDto } from './dto/create-notification.dto';
 import { CreatePushNotificationDto } from '../push-notifications/dto/create-push-notifications.dto';
+import { CreateSmsNotificationDto } from '../sms-notifications/dto/create-sms-notifications.dto';
+import { CreateEmailNotificationDto } from '../email-notifications/dto/create-email-notifications.dto';
 
 import { UsersService } from '../users/users.service';
 import { ChannelsService } from '../channels/channels.service';
 import { PushNotificationsService } from '../push-notifications/push-notifications.service';
+import { SmsNotificationsService } from '../sms-notifications/sms-notifications.service';
 
 import CONSTANTS from './notifications.constants';
+import { EmailNotificationsService } from 'src/email-notifications/email-notifications.service';
 const { CHANNELS } = CONSTANTS;
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -30,6 +34,10 @@ export class NotificationsService {
     private readonly channelsService: ChannelsService,
     @Inject(forwardRef(() => PushNotificationsService))
     private readonly pushNotificationsService: PushNotificationsService,
+    @Inject(forwardRef(() => SmsNotificationsService))
+    private readonly smsNotificationsService: SmsNotificationsService,
+    @Inject(forwardRef(() => EmailNotificationsService))
+    private readonly emailNotificationsService: EmailNotificationsService,
   ) {}
 
   async createNotificationByChannel(notificationDto: CreateNotificationDto) {
@@ -57,13 +65,25 @@ export class NotificationsService {
       );
     }
 
-    console.log('eyyy', userIds);
-
     switch (channelName) {
       case CHANNELS.EMAIL:
+        const emailNotificationDto: CreateEmailNotificationDto = {
+          userIds,
+          message,
+          channelId: channelObjectId,
+          subscribedId: subscribedObjectId,
+        };
+        this.emailNotificationsService.create(emailNotificationDto);
         break;
 
       case CHANNELS.SMS:
+        const smsNotificationsDto: CreateSmsNotificationDto = {
+          userIds,
+          message,
+          channelId: channelObjectId,
+          subscribedId: subscribedObjectId,
+        };
+        this.smsNotificationsService.create(smsNotificationsDto);
         break;
 
       case CHANNELS.PN:
