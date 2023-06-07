@@ -1,13 +1,20 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+
+import { UsersModule } from '../users/users.module';
+import { ChannelsModule } from '../channels/channels.module';
+import { PushNotificationsModule } from '../push-notifications/push-notifications.module';
 
 import { NotificationSchema } from './schemas/notifications.schema';
 
 import { NotificationsService } from './notifications.service';
+import { NotificationsController } from './notifications.controller';
 
 @Module({
   imports: [
-    // HttpModule,
+    ChannelsModule,
+    UsersModule,
+    forwardRef(() => PushNotificationsModule),
     MongooseModule.forFeature([
       {
         name: 'Notification',
@@ -16,6 +23,8 @@ import { NotificationsService } from './notifications.service';
       },
     ]),
   ],
+  exports: [NotificationsService],
   providers: [NotificationsService],
+  controllers: [NotificationsController],
 })
 export class NotificationsModule {}

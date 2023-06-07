@@ -8,7 +8,6 @@ import { NotificationCategoriesController } from './notification-categories.cont
 
 @Module({
   imports: [
-    // HttpModule,
     MongooseModule.forFeature([
       {
         name: 'NotificationCategory',

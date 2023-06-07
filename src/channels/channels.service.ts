@@ -13,4 +13,8 @@ export class ChannelsService {
   async findAll(): Promise<Channel[]> {
     return this.channelModel.find().exec();
   }
+
+  async getById(id: string): Promise<Channel> {
+    return this.channelModel.findOne({ _id: id }).exec();
+  }
 }

@@ -10,7 +10,6 @@ import { ChannelsController } from './channels.controller';
 @Module({
   providers: [ChannelsService],
   imports: [
-    // HttpModule,
     MongooseModule.forFeature([
       {
         name: 'Channel',
@@ -19,6 +18,7 @@ import { ChannelsController } from './channels.controller';
       },
     ]),
   ],
+  exports: [ChannelsService],
   controllers: [ChannelsController],
 })
 export class ChannelsModule {}

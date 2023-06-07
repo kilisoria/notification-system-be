@@ -6,10 +6,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-import { NotificationsController } from './notifications/notifications.controller';
 import { NotificationsModule } from './notifications/notifications.module';
 import { ChannelsModule } from './channels/channels.module';
 import { NotificationCategoriesModule } from './notification-categories/notification-categories.module';
+import { PushNotificationsService } from './push-notifications/push-notifications.service';
+import { PushNotificationsModule } from './push-notifications/push-notifications.module';
 
 @Module({
   imports: [
@@ -19,8 +20,10 @@ import { NotificationCategoriesModule } from './notification-categories/notifica
     ChannelsModule,
     NotificationCategoriesModule,
     MongooseModule.forRoot(`${process.env.MONGO_URI}`),
+    PushNotificationsModule,
   ],
-  controllers: [AppController, NotificationsController],
-  providers: [AppService],
+  providers: [PushNotificationsService],
+  // controllers: [AppController],
+  // providers: [AppService],
 })
 export class AppModule {}
