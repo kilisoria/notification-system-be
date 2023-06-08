@@ -11,11 +11,14 @@ export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) {}
 
   @Post()
-  @HttpCode(204)
-  create(@Body() createNotificationDto: CreateNotificationDto) {
-    this.notificationsService.createNotificationByChannel(
-      createNotificationDto,
-    );
+  async create(@Body() createNotificationDto: CreateNotificationDto) {
+    try {
+      await this.notificationsService.createNotificationByChannel(
+        createNotificationDto,
+      );
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Get('findAll')
