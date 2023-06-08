@@ -20,7 +20,7 @@ import { PushNotificationsService } from '../push-notifications/push-notificatio
 import { SmsNotificationsService } from '../sms-notifications/sms-notifications.service';
 
 import CONSTANTS from './notifications.constants';
-import { EmailNotificationsService } from 'src/email-notifications/email-notifications.service';
+import { EmailNotificationsService } from '../email-notifications/email-notifications.service';
 const { CHANNELS } = CONSTANTS;
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

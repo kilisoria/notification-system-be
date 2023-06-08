@@ -1,10 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
 
-import { User } from 'src/users/schemas/user.schema';
-import { Channel } from 'src/channels/schemas/channel.schema';
-import { NotificationCategory } from 'src/notification-categories/schemas/notification-category.schema';
-
+import { User } from '../../users/schemas/user.schema';
+import { Channel } from '../../channels/schemas/channel.schema';
+import { NotificationCategory } from '../../notification-categories/schemas/notification-category.schema';
 @Schema()
 export class Notification extends Document {
   @Prop()
