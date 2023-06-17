@@ -4,6 +4,8 @@ import { NotificationsService } from '../notifications/notifications.service';
 
 import { CreateSmsNotificationDto } from './dto/create-sms-notifications.dto';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const ObjectId = require('mongoose').Types.ObjectId;
 @Injectable()
 export class SmsNotificationsService {
   constructor(
@@ -18,19 +20,16 @@ export class SmsNotificationsService {
       
       // According this test we're registing this notification as a simple log.
       */
-    const { userIds, message, subscribedId, channelId } = smsNotificationDto;
+    const { userId, message, subscribedId, channelId } = smsNotificationDto;
 
-    let notification;
-    for await (const userId of userIds) {
-      notification = {
-        message,
-        user: userId,
-        channel: channelId,
-        subscribed: subscribedId,
-        sentAt: Date.now(),
-      };
+    const notification = {
+      message,
+      user: new ObjectId(userId),
+      channel: new ObjectId(channelId),
+      subscribed: new ObjectId(subscribedId),
+      sentAt: Date.now(),
+    };
 
-      this.notificationsService.create(notification);
-    }
+    this.notificationsService.create(notification);
   }
 }

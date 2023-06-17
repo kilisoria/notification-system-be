@@ -1,8 +1,8 @@
 {
   "name": "notification-system-be",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "BE for the Gila Challenge",
+  "author": "cristian soria",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

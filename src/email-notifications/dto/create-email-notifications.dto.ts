@@ -1,5 +1,5 @@
 export class CreateEmailNotificationDto {
-  userIds: object[];
+  userId: object;
   message: string;
   channelId: object;
   subscribedId: object;

@@ -1,5 +1,5 @@
 export class CreateSmsNotificationDto {
-  userIds: object[];
+  userId: object;
   message: string;
   channelId: object;
   subscribedId: object;

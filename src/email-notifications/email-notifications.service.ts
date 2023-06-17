@@ -1,9 +1,13 @@
 import { Inject, Injectable, forwardRef } from '@nestjs/common';
 
+import { Notification } from '../notifications/schemas/notifications.schema';
+
 import { NotificationsService } from '../notifications/notifications.service';
 
 import { CreateEmailNotificationDto } from './dto/create-email-notifications.dto';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const ObjectId = require('mongoose').Types.ObjectId;
 @Injectable()
 export class EmailNotificationsService {
   constructor(
@@ -19,19 +23,16 @@ export class EmailNotificationsService {
       
       // According this test we're registing this notification as a simple log.
       */
-    const { userIds, message, subscribedId, channelId } = emailNotificationDto;
+    const { userId, message, subscribedId, channelId } = emailNotificationDto;
 
-    let notification;
-    for await (const userId of userIds) {
-      notification = {
-        message,
-        user: userId,
-        channel: channelId,
-        subscribed: subscribedId,
-        sentAt: Date.now(),
-      };
+    const notification: Notification = {
+      message,
+      user: new ObjectId(userId),
+      channel: new ObjectId(channelId),
+      subscribed: new ObjectId(subscribedId),
+      sentAt: Date.now(),
+    };
 
-      this.notificationsService.create(notification);
-    }
+    this.notificationsService.create(notification);
   }
 }

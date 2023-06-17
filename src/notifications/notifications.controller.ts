@@ -13,7 +13,7 @@ export class NotificationsController {
   @Post()
   async create(@Body() createNotificationDto: CreateNotificationDto) {
     try {
-      await this.notificationsService.createNotificationByChannel(
+      await this.notificationsService.createNotificationByCategory(
         createNotificationDto,
       );
     } catch (error) {

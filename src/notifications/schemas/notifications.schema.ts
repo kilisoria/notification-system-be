@@ -5,7 +5,7 @@ import { User } from '../../users/schemas/user.schema';
 import { Channel } from '../../channels/schemas/channel.schema';
 import { NotificationCategory } from '../../notification-categories/schemas/notification-category.schema';
 @Schema()
-export class Notification extends Document {
+export class Notification {
   @Prop()
   message: string;
 

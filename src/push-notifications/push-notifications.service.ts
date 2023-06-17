@@ -4,6 +4,10 @@ import { NotificationsService } from '../notifications/notifications.service';
 
 import { CreatePushNotificationDto } from './dto/create-push-notifications.dto';
 
+import { Notification } from '../notifications/schemas/notifications.schema';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const ObjectId = require('mongoose').Types.ObjectId;
 @Injectable()
 export class PushNotificationsService {
   constructor(
@@ -19,19 +23,16 @@ export class PushNotificationsService {
       
       // According this test we're registing this notification as a log.
       */
-    const { userIds, message, subscribedId, channelId } = pushNotificationDto;
+    const { userId, message, subscribedId, channelId } = pushNotificationDto;
 
-    let notification;
-    for await (const userId of userIds) {
-      notification = {
-        message,
-        user: userId,
-        channel: channelId,
-        subscribed: subscribedId,
-        sentAt: Date.now(),
-      };
+    const notification: Notification = {
+      message,
+      user: new ObjectId(userId),
+      channel: new ObjectId(channelId),
+      subscribed: new ObjectId(subscribedId),
+      sentAt: Date.now(),
+    };
 
-      this.notificationsService.create(notification);
-    }
+    this.notificationsService.create(notification);
   }
 }
